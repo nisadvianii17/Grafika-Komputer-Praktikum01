@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta author= "2072051 - Nisa Deviani" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal 1</title>
+    <style>
+        #mycanvas {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="600" height="600">
+    </canvas>
+    <script>
+        const kanvas = document.querySelector("#mycanvas");
+        console.log(kanvas);
+        const ctx = kanvas.getContext("2d");
+
+        // ambil data
+        let dataGambar = ctx.getImageData(0,0,kanvas.width, kanvas.height);
+
+        // membuat sebuah function / i = x + (y . w) + 4
+        function gbr_titik(datanya, posisi, warna){
+            // let x = posisi.x;
+            // let y = posisi.y;
+            let {x, y} = posisi;
+            let {r, g, b} = warna;
+            let index = (x + y * kanvas.width) * 4;
+            datanya.data[index] = r;
+            datanya.data[index+1] = g;
+            datanya.data[index+2] = b;
+            datanya.data[index+3] = 255;
+        }
+        
+
+        for (j = 0; j <50; j++){
+            for (k = 0; k < j *2;k++){ 
+                gbr_titik(dataGambar, {x:100 + j, y:249 - k},{r:255,g:0,b:0});
+            }
+        }
+        
+        // membuat kotak
+        for (let j = 0; j<100; j++){
+            for (let i = 0;i<100;i++){
+                gbr_titik(dataGambar, {x:150 + i,y:150+j}, {r:255,g:0,b:0});
+            }
+        }
+
+        for (j = 0; j <50; j++){
+            for (k = 0; k < j *2;k++){ 
+                gbr_titik(dataGambar, {x:299 - j, y:249 - k}, {r:255,g:0,b:0});
+            }
+        }
+
+    
+
+        //belah ketupat
+        for (j = 0; j <50; j++){
+            for (k = 0; k < j *2;k++){ 
+                gbr_titik(dataGambar, {x:400 - j, y:200 - k}, {r:255,g:150,b:30});
+            }
+        }
+
+        for (j = 0; j <50; j++){
+            for (k = 0; k < j *2;k++){ 
+                gbr_titik(dataGambar, {x:301 + j, y:200 - k},{r:255,g:150,b:30});
+            }
+        }
+
+        for (j = 0; j <50; j++){
+            for (k = 0; k < j *2;k++){ 
+                gbr_titik(dataGambar, {x:301 + j, y:200 + k}, {r:255,g:150,b:30});
+            }
+        }
+
+        for (j = 0; j <50; j++){
+            for (k = 0; k < j *2;k++){ 
+                gbr_titik(dataGambar, {x:400 - j, y:200 + k}, {r:255,g:150,b:30});
+            }
+        }
+
+        ctx.putImageData(dataGambar,0,0);
+        
+</script>
+</body>
+</html>
